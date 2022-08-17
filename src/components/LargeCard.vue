@@ -1,29 +1,30 @@
 <template>
   <div class="card">
-    <div class="card__media">
+    <div class="card__media" v-if="displayMediaContent">
       <slot v-if="$slots.media" name="media" />
-      <img v-else src="https://via.placeholder.com/350x250" alt="media" class="card__media-img" />
+      <img v-else :src="imgSrc" alt="media" class="card__media-img" />
     </div>
 
-    <div class="card__header">
+    <div class="card__header" v-if="displayHeaderContent">
       <slot v-if="$slots.header" name="header" class="card__header-slot" />
 
       <div v-else>
-        <h2 class="card__header-title card__text">Card Title</h2>
-        <h3 class="card__header-subtitle card__text">Card Subtitle</h3>
+        <h2 class="card__header-title card__text">{{ title }}</h2>
+        <h3 class="card__header-subtitle card__text">{{ subtitle }}</h3>
       </div>
     </div>
 
     <div
-      v-if="$slots.default"
+      v-if="displaySectionContent"
       class="card__section card__text"
-      :class="{ 'no-bottom-padding': $slots.action, 'half-padding-top': $slots.media }"
+      :class="{ 'no-bottom-padding': $slots.actions, 'half-padding-top': $slots.media }"
     >
-      <slot />
+      <slot v-if="$slots.default" />
+      <p v-else class="card__text">{{ sectionText }}</p>
     </div>
 
-    <div v-if="$slots.actions" class="card__actions">
-      <slot name="actions" />
+    <div v-if="displayActionsContent" class="card__actions">
+      <slot name="actions" v-if="$slots.actions" />
     </div>
   </div>
 </template>
@@ -31,6 +32,65 @@
 <script>
 export default {
   name: 'LargeCard',
+  inheritAttrs: false,
+
+  props: {
+    title: {
+      type: String,
+      default: '',
+      validator: (v) => typeof v === 'string',
+    },
+
+    subtitle: {
+      type: String,
+      default: '',
+      validator: (v) => typeof v === 'string',
+    },
+
+    sectionText: {
+      type: String,
+      default: '',
+      validator: (v) => typeof v === 'string',
+    },
+
+    imgSrc: {
+      type: String,
+      default: '',
+      validator: (v) => typeof v === 'string',
+    },
+
+    displayMedia: {
+      type: Boolean,
+      required: false,
+      default: false,
+      validator: (v) => typeof v === 'boolean',
+    },
+
+    displayActions: {
+      type: Boolean,
+      required: false,
+      default: false,
+      validator: (v) => typeof v === 'boolean',
+    },
+  },
+
+  computed: {
+    displayMediaContent() {
+      return this.displayMedia && (this.imgSrc || this.$slots.media);
+    },
+
+    displayHeaderContent() {
+      return this.$slots.header || this.title || this.subtitle;
+    },
+
+    displaySectionContent() {
+      return this.$slots.default || this.sectionText;
+    },
+
+    displayActionsContent() {
+      return this.displayActions && this.$slots.actions;
+    },
+  },
 };
 </script>
 
@@ -60,7 +120,7 @@ export default {
   }
 
   .half-padding-top {
-    // padding-top: 0.625rem !important;
+    padding-top: 0.625rem !important;
   }
 
   &__media {
