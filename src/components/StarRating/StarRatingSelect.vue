@@ -23,6 +23,7 @@
 
 <script>
 import StarRatingInjectionValidation from '@/mixins/star-rating-injection-validation';
+import getMaterialIconName from '@/utils/get-material-icon-name';
 import '../../assets/styles/star-rating.scss';
 
 export default {
@@ -52,15 +53,7 @@ export default {
     },
 
     getStarIcon(rate) {
-      if (rate <= this.currentRating) {
-        return 'star';
-      }
-
-      if (Math.fround(rate - this.currentRating) < 1) {
-        return 'star_half';
-      }
-
-      return 'star_border';
+      return getMaterialIconName(rate, this.currentRating);
     },
   },
 };
