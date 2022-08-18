@@ -9,6 +9,7 @@
       display-media
       display-actions
     >
+      <StarRatingInput> Rate This </StarRatingInput>
       <template #actions>
         <div class="large-card__actions">
           <CustomButton @action="doSomething" backgroundColor="#8338ec" isFlat isRound
@@ -24,6 +25,7 @@
 <script>
 import LargeCard from './components/LargeCard.vue';
 import CustomButton from './components/CustomButton.vue';
+import StarRatingInput from './components/StarRating/StarRatingInput.vue';
 
 export default {
   name: 'App',
@@ -31,6 +33,7 @@ export default {
   components: {
     LargeCard,
     CustomButton,
+    StarRatingInput,
   },
 
   methods: {
