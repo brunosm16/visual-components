@@ -28,7 +28,7 @@ export default {
   mixins: [StarRatingResultMixin],
 
   provide: {
-    starRating: false,
+    starRating: true,
   },
 
   data: () => ({

@@ -18,20 +18,14 @@
 
 <script>
 import StarRatingResultMixin from '@/mixins/star-rating-result';
+import StarRatingInjectionValidation from '@/mixins/star-rating-injection-validation';
+
 import '../../assets/styles/star-rating.scss';
 
 export default {
   name: 'StarRatingResult',
 
-  mixins: [StarRatingResultMixin],
-
-  inject: {
-    starRating: {
-      default() {
-        console.error('StarRatingResult needs to be a child of StarRating');
-      },
-    },
-  },
+  mixins: [StarRatingResultMixin, StarRatingInjectionValidation],
 
   methods: {
     getStarIcon(rate) {
