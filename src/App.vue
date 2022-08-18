@@ -45,7 +45,8 @@ export default {
     },
 
     rateFiveStars() {
-      console.log('rateFiveStars');
+      this.$refs.starRating.currentRating = 5;
+      this.$refs.starRating.voted = true;
     },
   },
 };
