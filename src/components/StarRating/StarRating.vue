@@ -1,7 +1,14 @@
 <template>
   <div class="star-rating-wrapper">
-    <StarRatingSelect v-if="showRatingSelect" :totalRating="totalRating" @set-rating="rate" />
-    <StarRatingResult v-else :totalRating="totalRating" :rating="getRating" :votes="votes" />
+    <component
+      :is="getProperRatingComponent"
+      :totalRating="totalRating"
+      :rating="getRating"
+      :votes="votes"
+      @set-rating="rate"
+    >
+      Rate This Card
+    </component>
   </div>
 </template>
 
@@ -43,12 +50,16 @@ export default {
   }),
 
   computed: {
-    showRatingSelect() {
-      return !this.voted;
-    },
-
     getRating() {
       return this.rating || this.currentRating;
+    },
+
+    getProperRatingComponent() {
+      if (this.voted) {
+        return StarRatingResult;
+      }
+
+      return StarRatingSelect;
     },
   },
 
