@@ -17,36 +17,19 @@
 </template>
 
 <script>
+import StarRatingResultMixin from '@/mixins/star-rating-result';
 import '../../assets/styles/star-rating.scss';
 
 export default {
   name: 'StarRatingResult',
+
+  mixins: [StarRatingResultMixin],
 
   inject: {
     starRating: {
       default() {
         console.error('StarRatingResult needs to be a child of StarRating');
       },
-    },
-  },
-
-  props: {
-    totalRating: {
-      type: Number,
-      default: 5,
-      validator: (v) => typeof v === 'number',
-    },
-
-    rating: {
-      type: Number,
-      default: 0,
-      validator: (v) => typeof v === 'number',
-    },
-
-    votes: {
-      type: Number,
-      default: 0,
-      validator: (v) => typeof v === 'number',
     },
   },
 
