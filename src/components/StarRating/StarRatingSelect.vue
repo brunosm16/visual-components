@@ -1,14 +1,15 @@
 <template>
-  <div class="star-rating-input">
-    <div class="star-rating-input__message" v-if="$slots.default">
-      <slot />
+  <div class="star-rating">
+    <div class="star-rating__message">
+      <slot v-if="$slots.default" />
+      <span v-else>Rate This</span>
     </div>
 
-    <ul class="star-rating-input__star-list">
+    <ul class="star-rating__star-list">
       <li
         v-for="rate in totalRating"
         :key="rate"
-        class="star-rating-input__star-list-item"
+        class="star-rating__star-list-item"
         @click="submitRating(rate)"
         @mouseenter="updateCurrentRating(rate)"
         @focus="updateCurrentRating(rate)"
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import '../../assets/styles/star-rating.scss';
+
 export default {
   name: 'StarRatingInput',
 
@@ -61,28 +64,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.star-rating-input {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+.star-rating {
   &__message {
     font-size: 1.25rem;
-  }
-
-  &__star-list {
-    display: inline-block;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    .material-icons {
-      color: #f9f871;
-    }
-
-    & > li {
-      float: left;
-    }
   }
 }
 </style>

@@ -1,0 +1,22 @@
+.star-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .material-icons {
+        user-select: none;
+        color: #f9f871;
+    }
+
+    ul {
+        display: inline-block;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        &>li {
+            float: left;
+
+        }
+    }
+}
