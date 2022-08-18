@@ -11,8 +11,10 @@
     >
       <template #actions>
         <div class="large-card__actions">
-          <CustomButton @action="doSomething" />
-          <CustomButton @action="doSomething" />
+          <CustomButton @action="doSomething" backgroundColor="#8338ec" isFlat isRound
+            >Click Here</CustomButton
+          >
+          <CustomButton @action="doSomething">Click Here</CustomButton>
         </div>
       </template>
     </LargeCard>
