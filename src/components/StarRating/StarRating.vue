@@ -24,6 +24,10 @@ export default {
     StarRatingSelect,
   },
 
+  provide: {
+    starRating: false,
+  },
+
   props: {
     totalRating: {
       type: Number,

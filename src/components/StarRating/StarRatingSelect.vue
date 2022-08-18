@@ -27,6 +27,14 @@ import '../../assets/styles/star-rating.scss';
 export default {
   name: 'StarRatingInput',
 
+  inject: {
+    starRating: {
+      default() {
+        console.error('StarRatingResult needs to be a child of StarRating');
+      },
+    },
+  },
+
   props: {
     totalRating: {
       type: Number,
