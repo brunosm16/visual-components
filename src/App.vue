@@ -9,13 +9,13 @@
       display-media
       display-actions
     >
-      <StarRating :votes="4"/>
+      <StarRating :votes="4" ref="starRating" />
       <template #actions>
         <div class="large-card__actions">
-          <CustomButton @action="doSomething" backgroundColor="#8338ec" isFlat isRound
-            >Click Here</CustomButton
+          <CustomButton @action="resetRating" backgroundColor="#8338ec" isFlat isRound
+            >Reset Rating</CustomButton
           >
-          <CustomButton @action="doSomething">Click Here</CustomButton>
+          <CustomButton @action="rateFiveStars">Rate with 5 stars</CustomButton>
         </div>
       </template>
     </LargeCard>
@@ -36,9 +36,16 @@ export default {
     StarRating,
   },
 
+  data: () => ({}),
+
   methods: {
-    doSomething() {
-      console.log('doSomething called');
+    resetRating() {
+      this.$refs.starRating.currentRating = 0;
+      this.$refs.starRating.voted = false;
+    },
+
+    rateFiveStars() {
+      console.log('rateFiveStars');
     },
   },
 };
